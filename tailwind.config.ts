@@ -80,10 +80,34 @@ export default {
             height: "0",
           },
         },
+        "slide-in-from-top": {
+          from: {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
+        "fade-in": {
+          from: {
+            opacity: "0",
+          },
+          to: {
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-in-from-top-2": "slide-in-from-top 0.3s ease-out",
+        "fade-in": "fade-in 0.3s ease-out",
+      },
+      animationDelay: {
+        "200": "200ms",
+        "400": "400ms",
       },
     },
   },
