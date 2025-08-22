@@ -9,10 +9,10 @@ export default function Loader() {
             <div className="w-1 h-8 bg-white opacity-60 rounded-full animate-pulse"></div>
           </div>
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 -ml-2">
-            <div className="w-1 h-6 bg-white opacity-40 rounded-full animate-pulse animation-delay-200"></div>
+            <div className="w-1 h-6 bg-white opacity-40 rounded-full animate-pulse" style={{ animationDelay: '200ms' }}></div>
           </div>
           <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 ml-2">
-            <div className="w-1 h-6 bg-white opacity-40 rounded-full animate-pulse animation-delay-400"></div>
+            <div className="w-1 h-6 bg-white opacity-40 rounded-full animate-pulse" style={{ animationDelay: '400ms' }}></div>
           </div>
           
           {/* Spinning spoon */}
