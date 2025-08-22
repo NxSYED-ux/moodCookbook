@@ -118,29 +118,58 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-12 transition-colors duration-500">
         <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/3 left-1/3 w-56 h-56 bg-gradient-to-br from-red-400/30 to-orange-400/30 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 left-1/3 w-56 h-56 bg-gradient-to-br from-red-400/30 to-orange-400/30 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-40 h-40 bg-gradient-to-br from-yellow-400/25 to-red-400/25 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <ThemeToggle />
         <div className="relative z-10 max-w-2xl mx-auto px-6 text-center">
-          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-3xl shadow-2xl p-10 border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
-            <div className="text-8xl mb-6 animate-bounce">😓</div>
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-              Oops! Something went wrong
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">{error}</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl shadow-2xl p-8 sm:p-12 border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
+            {/* Error Animation */}
+            <div className="mb-8">
+              <div className="text-6xl sm:text-8xl mb-4 animate-bounce">😓</div>
+              <div className="flex justify-center gap-1">
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                <div className="w-2 h-2 bg-red-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+              </div>
+            </div>
+
+            <div className="mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+                Oops! Kitchen Error
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 mb-6">
+                {error}
+              </p>
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/30 rounded-xl p-4">
+                <p className="text-sm text-red-700 dark:text-red-300">
+                  Don't worry! Our AI chef is usually very reliable. This might just be a temporary hiccup.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button
                 onClick={handleRetry}
-                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="group relative overflow-hidden bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 hover:from-orange-600 hover:via-red-600 hover:to-orange-700 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl"
               >
-                Try Again
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <div className="relative flex items-center justify-center gap-2">
+                  <span className="text-lg">🔄</span>
+                  <span>Try Again</span>
+                </div>
               </button>
+
               <button
                 onClick={handleBackToMoods}
-                className="bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700 text-white font-bold py-3 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="group relative overflow-hidden bg-gradient-to-r from-gray-500 via-gray-600 to-gray-700 hover:from-gray-600 hover:via-gray-700 hover:to-gray-800 text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-xl"
               >
-                Back to Moods
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <div className="relative flex items-center justify-center gap-2">
+                  <span className="text-lg">🏠</span>
+                  <span>Change Mood</span>
+                </div>
               </button>
             </div>
           </div>
