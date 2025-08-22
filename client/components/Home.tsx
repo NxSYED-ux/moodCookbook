@@ -75,24 +75,38 @@ export default function Home() {
   if (state === "loading") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-12 transition-colors duration-500">
-        {/* Animated background */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-400/30 to-pink-400/30 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute top-3/4 right-1/4 w-48 h-48 bg-gradient-to-br from-blue-400/30 to-purple-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        {/* Enhanced animated background */}
+        <div className="absolute inset-0 opacity-25">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-br from-orange-400/40 to-pink-400/40 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-3/4 right-1/4 w-48 h-48 bg-gradient-to-br from-blue-400/40 to-purple-400/40 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/4 left-1/3 w-36 h-36 bg-gradient-to-br from-green-400/35 to-emerald-400/35 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <ThemeToggle />
         <div className="relative z-10 max-w-4xl mx-auto px-6">
+          {/* Loading Header */}
+          <div className="text-center mb-8">
+            <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 inline-block">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                Finding your perfect <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 capitalize">{currentMood}</span> recipe
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                Our AI chef is selecting the best match for your mood
+              </p>
+            </div>
+          </div>
+
           <Loader />
+
           <div className="text-center mt-8">
             <button
               onClick={handleBackToMoods}
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-200 hover:bg-white dark:hover:bg-gray-700 shadow-lg"
+              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-6 py-3 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-lg hover:shadow-xl"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
-              Back to moods
+              <span className="font-semibold">Change Mood</span>
             </button>
           </div>
         </div>
