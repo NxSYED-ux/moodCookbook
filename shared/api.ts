@@ -10,3 +10,20 @@
 export interface DemoResponse {
   message: string;
 }
+
+/**
+ * Request type for /api/getRecipe
+ */
+export interface GetRecipeRequest {
+  mood: string;
+}
+
+/**
+ * Response type for /api/getRecipe
+ */
+export interface Recipe {
+  name: string;
+  image: string;
+  ingredients: string[];
+  steps: string[];
+}
