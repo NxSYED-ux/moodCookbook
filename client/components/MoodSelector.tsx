@@ -56,26 +56,26 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
         <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }}></div>
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
         {/* Hero Section */}
-        <div className="text-center mb-20">
-          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 shadow-lg">
-            <span className="text-2xl">🍳</span>
-            <span className="text-sm font-semibold text-gray-700 uppercase tracking-wider">
+        <div className="text-center mb-12 sm:mb-20">
+          <div className="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8 shadow-lg transition-colors duration-500">
+            <span className="text-xl sm:text-2xl">🍳</span>
+            <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
               AI-Powered Recipe Matching
             </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-6 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent mb-4 sm:mb-6 tracking-tight px-4">
             Mood Cookbook
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
             Your emotions are the secret ingredient. Tell us how you're feeling,
             and we'll craft the <span className="text-orange-500 font-semibold">perfect recipe</span> to match your vibe.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-4">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-green-500 rounded-full"></span>
               <span>Curated by chefs</span>
