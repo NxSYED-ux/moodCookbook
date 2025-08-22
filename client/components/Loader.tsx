@@ -1,10 +1,10 @@
 export default function Loader() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-[50vh] sm:min-h-[60vh] space-y-6 sm:space-y-8 px-4">
       <div className="relative">
         {/* Main cooking pot with enhanced design */}
         <div className="relative">
-          <div className="w-24 h-24 bg-gradient-to-b from-gray-600 via-gray-700 to-gray-800 rounded-b-3xl relative shadow-2xl">
+          <div className="w-20 sm:w-24 h-20 sm:h-24 bg-gradient-to-b from-gray-600 via-gray-700 to-gray-800 dark:from-gray-500 dark:via-gray-600 dark:to-gray-700 rounded-b-2xl sm:rounded-b-3xl relative shadow-2xl">
             {/* Pot rim */}
             <div className="absolute -top-1 left-0 right-0 h-2 bg-gradient-to-r from-gray-500 to-gray-600 rounded-t-lg shadow-inner"></div>
 
