@@ -198,22 +198,42 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
             )}
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+          {/* Enhanced Action Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <button
               onClick={handleCookThis}
-              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="group relative overflow-hidden bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 hover:from-green-700 hover:via-emerald-700 hover:to-green-800 text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1"
             >
-              <span className="text-lg sm:text-xl">✅</span>
-              <span className="text-sm sm:text-base md:text-lg">Let's Cook This!</span>
+              {/* Animated background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+              <div className="relative flex items-center gap-3">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <span className="text-xl">✅</span>
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold">Let's Cook This!</div>
+                  <div className="text-xs opacity-90">Start cooking now</div>
+                </div>
+              </div>
             </button>
 
             <button
               onClick={onRetry}
-              className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="group relative overflow-hidden bg-gradient-to-r from-orange-500 via-red-500 to-orange-600 hover:from-orange-600 hover:via-red-600 hover:to-orange-700 text-white font-bold py-4 sm:py-5 px-6 sm:px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-105 hover:-translate-y-1"
             >
-              <span className="text-lg sm:text-xl">🔄</span>
-              <span className="text-sm sm:text-base md:text-lg">Try Another Recipe</span>
+              {/* Animated background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+
+              <div className="relative flex items-center gap-3">
+                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <span className="text-xl">🔄</span>
+                </div>
+                <div className="text-left">
+                  <div className="text-lg font-bold">Try Another</div>
+                  <div className="text-xs opacity-90">New recipe suggestion</div>
+                </div>
+              </div>
             </button>
           </div>
 
