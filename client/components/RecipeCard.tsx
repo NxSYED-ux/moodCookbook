@@ -29,9 +29,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
   const progress = (checkedCount / totalIngredients) * 100;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6">
       {/* Recipe Card */}
-      <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden border border-white/20">
+      <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
         {/* Recipe Header with floating elements */}
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40"></div>
