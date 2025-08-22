@@ -17,7 +17,7 @@ export default function Results() {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  
+
   const [state, setState] = useState<ResultsState>("loading");
   const [currentMood, setCurrentMood] = useState<string>("");
   const [recipe, setRecipe] = useState<Recipe | null>(null);
@@ -27,7 +27,7 @@ export default function Results() {
   useEffect(() => {
     const locationState = location.state as LocationState;
     const moodFromUrl = searchParams.get("mood");
-    
+
     if (locationState?.recipe && locationState?.mood) {
       // Recipe data passed via navigation state
       setCurrentMood(locationState.mood);
