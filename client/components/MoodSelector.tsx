@@ -92,20 +92,20 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
         </div>
 
         {/* Mood Selection */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
+        <div className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-3 sm:mb-4 px-4">
             How are you feeling today?
           </h2>
-          <p className="text-center text-gray-600 mb-12">
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 px-4">
             Choose your current mood and discover recipes that resonate with your emotions
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 px-4">
             {moods.map((mood, index) => (
               <button
                 key={mood.value}
                 onClick={() => onSelectMood(mood.value)}
-                className={`group relative overflow-hidden rounded-3xl p-8 text-white font-bold text-lg shadow-xl hover:shadow-2xl ${mood.shadow} transform hover:scale-105 hover:-translate-y-2 transition-all duration-500 bg-gradient-to-br ${mood.color}`}
+                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 text-white font-bold text-sm sm:text-base md:text-lg shadow-xl hover:shadow-2xl ${mood.shadow} transform hover:scale-105 hover:-translate-y-2 transition-all duration-500 bg-gradient-to-br ${mood.color} min-h-[120px] sm:min-h-[140px] md:min-h-[160px]`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Glossy overlay */}
@@ -114,14 +114,14 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
                 {/* Hover glow effect */}
                 <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
 
-                <div className="relative z-10 text-center">
-                  <div className="text-5xl mb-4 group-hover:scale-125 transition-transform duration-500 drop-shadow-lg">
+                <div className="relative z-10 text-center flex flex-col justify-center h-full">
+                  <div className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4 group-hover:scale-125 transition-transform duration-500 drop-shadow-lg">
                     {mood.emoji}
                   </div>
-                  <div className="text-xl font-bold mb-2 drop-shadow-sm">
+                  <div className="text-sm sm:text-lg md:text-xl font-bold mb-1 sm:mb-2 drop-shadow-sm">
                     {mood.text}
                   </div>
-                  <div className="text-xs opacity-90 font-medium">
+                  <div className="text-xs opacity-90 font-medium hidden sm:block">
                     {mood.description}
                   </div>
                 </div>
@@ -136,10 +136,10 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 text-gray-600 bg-white/60 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg">
+        <div className="text-center px-4">
+          <div className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-300 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-lg transition-colors duration-500">
             <span className="animate-pulse">✨</span>
-            <span className="text-sm font-medium">
+            <span className="text-xs sm:text-sm font-medium text-center">
               Each mood unlocks unique, expertly-curated recipes
             </span>
             <span className="animate-pulse">✨</span>
