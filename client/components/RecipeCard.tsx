@@ -172,30 +172,30 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <button
               onClick={handleCookThis}
-              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <span className="text-xl">✅</span>
-              <span className="text-lg">Let's Cook This!</span>
+              <span className="text-lg sm:text-xl">✅</span>
+              <span className="text-sm sm:text-base md:text-lg">Let's Cook This!</span>
             </button>
 
             <button
               onClick={onRetry}
-              className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <span className="text-xl">🔄</span>
-              <span className="text-lg">Try Another Recipe</span>
+              <span className="text-lg sm:text-xl">🔄</span>
+              <span className="text-sm sm:text-base md:text-lg">Try Another Recipe</span>
             </button>
           </div>
 
           {/* Success Message */}
           {showSuccess && (
-            <div className="mt-6 p-6 bg-gradient-to-r from-green-100 to-emerald-100 border border-green-200 rounded-2xl text-center animate-fade-in shadow-lg">
-              <div className="text-3xl mb-2">🎉</div>
-              <h4 className="text-xl font-bold text-green-800 mb-2">Fantastic Choice!</h4>
-              <p className="text-green-700">
+            <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 border border-green-200 dark:border-green-700/50 rounded-xl sm:rounded-2xl text-center animate-fade-in shadow-lg">
+              <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">🎉</div>
+              <h4 className="text-lg sm:text-xl font-bold text-green-800 dark:text-green-300 mb-1 sm:mb-2">Fantastic Choice!</h4>
+              <p className="text-sm sm:text-base text-green-700 dark:text-green-400">
                 You're all set to create something amazing. Happy cooking, and enjoy every delicious bite!
               </p>
             </div>
