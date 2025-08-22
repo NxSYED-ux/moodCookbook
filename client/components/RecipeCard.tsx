@@ -124,7 +124,7 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
 
         {/* Success Message */}
         {showSuccess && (
-          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center animate-in fade-in duration-300">
+          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded-lg text-center animate-fade-in">
             <span className="text-lg">🎉</span>
             <span className="ml-2 font-semibold">Happy cooking! Enjoy your meal!</span>
           </div>
