@@ -38,29 +38,31 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
           <img
             src={recipe.image}
             alt={recipe.name}
-            className="w-full h-80 object-cover"
+            className="w-full h-48 sm:h-64 md:h-80 object-cover"
           />
 
           {/* Floating recipe info */}
-          <div className="absolute inset-0 flex items-end p-8">
-            <div className="bg-white/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/30 max-w-2xl">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-gray-600 uppercase tracking-wider">
+          <div className="absolute inset-0 flex items-end p-4 sm:p-6 md:p-8">
+            <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-xl border border-white/30 dark:border-gray-700/30 max-w-full sm:max-w-2xl transition-colors duration-500">
+              <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                <div className="w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                   Perfect Match Recipe
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-1 sm:mb-2">
                 {recipe.name}
               </h2>
-              <div className="flex items-center gap-4 text-sm text-gray-600">
+              <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                 <span className="flex items-center gap-1">
                   <span>🕒</span>
-                  <span>Ready in {Math.floor(Math.random() * 30) + 15} mins</span>
+                  <span className="hidden sm:inline">Ready in {Math.floor(Math.random() * 30) + 15} mins</span>
+                  <span className="sm:hidden">{Math.floor(Math.random() * 30) + 15}m</span>
                 </span>
                 <span className="flex items-center gap-1">
                   <span>👥</span>
-                  <span>Serves {Math.floor(Math.random() * 4) + 2}</span>
+                  <span className="hidden sm:inline">Serves {Math.floor(Math.random() * 4) + 2}</span>
+                  <span className="sm:hidden">{Math.floor(Math.random() * 4) + 2}</span>
                 </span>
                 <span className="flex items-center gap-1">
                   <span>⭐</span>
@@ -71,26 +73,26 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
           </div>
         </div>
 
-        <div className="p-8 md:p-10">
+        <div className="p-4 sm:p-6 md:p-8 lg:p-10">
           {/* Ingredients Section with Progress */}
-          <div className="mb-10">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 flex items-center">
-                <span className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center text-white mr-3">
+          <div className="mb-6 sm:mb-8 md:mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
+                <span className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white mr-2 sm:mr-3 text-sm sm:text-base">
                   🛒
                 </span>
                 Shopping List
               </h3>
-              <div className="text-right">
-                <div className="text-sm text-gray-600 mb-1">Progress</div>
+              <div className="text-left sm:text-right">
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Progress</div>
                 <div className="flex items-center gap-2">
-                  <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div className="w-20 sm:w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-green-500 to-emerald-500 transition-all duration-500 ease-out"
                       style={{ width: `${progress}%` }}
                     ></div>
                   </div>
-                  <span className="text-sm font-semibold text-gray-700">
+                  <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
                     {checkedCount}/{totalIngredients}
                   </span>
                 </div>
