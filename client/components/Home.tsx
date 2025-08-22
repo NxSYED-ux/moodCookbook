@@ -3,6 +3,7 @@ import { Recipe } from "@shared/api";
 import MoodSelector from "./MoodSelector";
 import RecipeCard from "./RecipeCard";
 import Loader from "./Loader";
+import ThemeToggle from "./ThemeToggle";
 
 type AppState = "selecting" | "loading" | "recipe" | "error";
 
