@@ -39,7 +39,7 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
         {/* Decorative background elements */}
         <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-orange-200/30 to-red-200/30 rounded-full blur-xl"></div>
         <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-purple-200/30 to-pink-200/30 rounded-full blur-xl"></div>
-        
+
         {/* Recipe Card */}
         <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/40 dark:border-gray-700/40 overflow-hidden">
           {/* Desktop Two-Column Layout */}
@@ -53,11 +53,11 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                   alt={recipe.name}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {/* Gradient Overlays */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/20"></div>
-                
+
                 {/* Floating Recipe Info */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-8 lg:p-10">
                   {/* Badge */}
@@ -70,7 +70,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                     </div>
                     <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm rounded-full px-4 py-2 border border-orange-200/30">
                       <span className="text-white text-sm">🔥</span>
-                      <span className="text-white text-sm font-semibold">Trending</span>
+                      <span className="text-white text-sm font-semibold">
+                        Trending
+                      </span>
                     </div>
                   </div>
 
@@ -84,21 +86,27 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
                       <div className="text-center">
                         <div className="text-2xl mb-1">⏱️</div>
-                        <div className="text-white text-sm font-semibold">{cookingTime} min</div>
+                        <div className="text-white text-sm font-semibold">
+                          {cookingTime} min
+                        </div>
                         <div className="text-white/70 text-xs">Cook Time</div>
                       </div>
                     </div>
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
                       <div className="text-center">
                         <div className="text-2xl mb-1">👥</div>
-                        <div className="text-white text-sm font-semibold">{servings} people</div>
+                        <div className="text-white text-sm font-semibold">
+                          {servings} people
+                        </div>
                         <div className="text-white/70 text-xs">Servings</div>
                       </div>
                     </div>
                     <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
                       <div className="text-center">
                         <div className="text-2xl mb-1">⭐</div>
-                        <div className="text-white text-sm font-semibold">{rating.toFixed(1)}</div>
+                        <div className="text-white text-sm font-semibold">
+                          {rating.toFixed(1)}
+                        </div>
                         <div className="text-white/70 text-xs">Rating</div>
                       </div>
                     </div>
@@ -117,7 +125,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                         </div>
                         <div>
                           <div className="text-lg font-bold">Start Cooking</div>
-                          <div className="text-xs opacity-90">Let's make this!</div>
+                          <div className="text-xs opacity-90">
+                            Let's make this!
+                          </div>
                         </div>
                       </div>
                     </button>
@@ -132,7 +142,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                         </div>
                         <div>
                           <div className="text-lg font-bold">Try Another</div>
-                          <div className="text-xs opacity-90">New suggestion</div>
+                          <div className="text-xs opacity-90">
+                            New suggestion
+                          </div>
                         </div>
                       </div>
                     </button>
@@ -160,10 +172,13 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                       </p>
                     </div>
                   </div>
-                  
+
                   {/* Progress Circle */}
                   <div className="relative w-16 h-16">
-                    <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 36 36">
+                    <svg
+                      className="w-16 h-16 transform -rotate-90"
+                      viewBox="0 0 36 36"
+                    >
                       <path
                         d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                         fill="none"
@@ -204,7 +219,11 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                         />
                         {checkedIngredients[index] && (
                           <div className="absolute inset-0 flex items-center justify-center text-emerald-600 pointer-events-none">
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <svg
+                              className="w-4 h-4"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
                               <path
                                 fillRule="evenodd"
                                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
