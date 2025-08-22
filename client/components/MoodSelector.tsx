@@ -9,7 +9,7 @@ const moods = [
     value: "lazy",
     color: "from-indigo-500 via-blue-500 to-blue-600",
     description: "Quick & easy comfort foods",
-    shadow: "shadow-blue-500/25"
+    shadow: "shadow-blue-500/25",
   },
   {
     emoji: "❤️",
@@ -17,7 +17,7 @@ const moods = [
     value: "romantic",
     color: "from-pink-500 via-rose-500 to-red-500",
     description: "Intimate dishes for two",
-    shadow: "shadow-pink-500/25"
+    shadow: "shadow-pink-500/25",
   },
   {
     emoji: "😌",
@@ -25,7 +25,7 @@ const moods = [
     value: "stressed",
     color: "from-emerald-500 via-green-500 to-teal-500",
     description: "Soothing & calming meals",
-    shadow: "shadow-green-500/25"
+    shadow: "shadow-green-500/25",
   },
   {
     emoji: "🤩",
@@ -33,7 +33,7 @@ const moods = [
     value: "excited",
     color: "from-amber-500 via-orange-500 to-red-500",
     description: "Vibrant & energizing dishes",
-    shadow: "shadow-orange-500/25"
+    shadow: "shadow-orange-500/25",
   },
   {
     emoji: "🥳",
@@ -41,8 +41,8 @@ const moods = [
     value: "party",
     color: "from-purple-500 via-violet-500 to-purple-600",
     description: "Fun foods for gatherings",
-    shadow: "shadow-purple-500/25"
-  }
+    shadow: "shadow-purple-500/25",
+  },
 ];
 
 export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
@@ -51,9 +51,18 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-purple-500/20 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-indigo-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-40 left-1/4 w-20 h-20 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute bottom-20 right-1/4 w-28 h-28 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }}></div>
+        <div
+          className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-400/20 to-indigo-500/20 rounded-full blur-xl animate-pulse"
+          style={{ animationDelay: "1s" }}
+        ></div>
+        <div
+          className="absolute bottom-40 left-1/4 w-20 h-20 bg-gradient-to-br from-green-400/20 to-emerald-500/20 rounded-full blur-xl animate-pulse"
+          style={{ animationDelay: "2s" }}
+        ></div>
+        <div
+          className="absolute bottom-20 right-1/4 w-28 h-28 bg-gradient-to-br from-orange-400/20 to-red-500/20 rounded-full blur-xl animate-pulse"
+          style={{ animationDelay: "3s" }}
+        ></div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
@@ -72,7 +81,11 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
 
           <p className="text-lg sm:text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
             Your emotions are the secret ingredient. Tell us how you're feeling,
-            and we'll craft the <span className="text-orange-500 font-semibold">perfect recipe</span> to match your vibe.
+            and we'll craft the{" "}
+            <span className="text-orange-500 font-semibold">
+              perfect recipe
+            </span>{" "}
+            to match your vibe.
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400 px-4">
@@ -97,7 +110,8 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
             How are you feeling today?
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-300 mb-8 sm:mb-12 px-4">
-            Choose your current mood and discover recipes that resonate with your emotions
+            Choose your current mood and discover recipes that resonate with
+            your emotions
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 px-4">
@@ -128,8 +142,14 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
 
                 {/* Animated sparkles */}
                 <div className="absolute top-3 right-3 w-3 h-3 bg-white opacity-60 rounded-full group-hover:animate-ping"></div>
-                <div className="absolute bottom-3 left-3 w-2 h-2 bg-white opacity-40 rounded-full group-hover:animate-ping" style={{ animationDelay: '0.2s' }}></div>
-                <div className="absolute top-1/2 left-3 w-1 h-1 bg-white opacity-50 rounded-full group-hover:animate-ping" style={{ animationDelay: '0.4s' }}></div>
+                <div
+                  className="absolute bottom-3 left-3 w-2 h-2 bg-white opacity-40 rounded-full group-hover:animate-ping"
+                  style={{ animationDelay: "0.2s" }}
+                ></div>
+                <div
+                  className="absolute top-1/2 left-3 w-1 h-1 bg-white opacity-50 rounded-full group-hover:animate-ping"
+                  style={{ animationDelay: "0.4s" }}
+                ></div>
               </button>
             ))}
           </div>

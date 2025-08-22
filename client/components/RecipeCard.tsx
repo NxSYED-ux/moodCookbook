@@ -8,7 +8,7 @@ interface RecipeCardProps {
 
 export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
   const [checkedIngredients, setCheckedIngredients] = useState<boolean[]>(
-    new Array(recipe.ingredients.length).fill(false)
+    new Array(recipe.ingredients.length).fill(false),
   );
   const [showSteps, setShowSteps] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -90,9 +90,7 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                   </div>
                   <div className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-full px-3 py-2">
                     <span className="text-lg">🔥</span>
-                    <span className="text-sm font-bold">
-                      Popular
-                    </span>
+                    <span className="text-sm font-bold">Popular</span>
                   </div>
                 </div>
               </div>
@@ -111,7 +109,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                 Shopping List
               </h3>
               <div className="text-left sm:text-right">
-                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">Progress</div>
+                <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-1">
+                  Progress
+                </div>
                 <div className="flex items-center gap-2">
                   <div className="w-20 sm:w-24 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                     <div
@@ -141,8 +141,16 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                     />
                     {checkedIngredients[index] && (
                       <div className="absolute inset-0 flex items-center justify-center text-green-600 pointer-events-none">
-                        <svg className="w-3 sm:w-4 h-3 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <svg
+                          className="w-3 sm:w-4 h-3 sm:h-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
                         </svg>
                       </div>
                     )}
@@ -171,11 +179,25 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                 <span className="w-8 sm:w-10 h-8 sm:h-10 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg sm:rounded-xl flex items-center justify-center text-white mr-2 sm:mr-3 text-sm sm:text-base">
                   👨‍🍳
                 </span>
-                <span className="text-sm sm:text-xl md:text-2xl">Cooking Instructions</span>
+                <span className="text-sm sm:text-xl md:text-2xl">
+                  Cooking Instructions
+                </span>
               </span>
-              <div className={`w-7 sm:w-8 h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-600 ${showSteps ? 'rotate-180' : ''}`}>
-                <svg className="w-3 sm:w-4 h-3 sm:h-4 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <div
+                className={`w-7 sm:w-8 h-7 sm:h-8 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:bg-gray-200 dark:group-hover:bg-gray-600 ${showSteps ? "rotate-180" : ""}`}
+              >
+                <svg
+                  className="w-3 sm:w-4 h-3 sm:h-4 text-gray-600 dark:text-gray-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </div>
             </button>
@@ -183,14 +205,19 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
             {showSteps && (
               <div className="space-y-4 sm:space-y-6 animate-slide-in-from-top-2">
                 {recipe.steps.map((step, index) => (
-                  <div key={index} className="flex gap-3 sm:gap-4 md:gap-6 group">
+                  <div
+                    key={index}
+                    className="flex gap-3 sm:gap-4 md:gap-6 group"
+                  >
                     <div className="flex-shrink-0">
                       <div className="w-8 sm:w-10 md:w-12 h-8 sm:h-10 md:h-12 bg-gradient-to-br from-orange-500 to-red-600 text-white rounded-lg sm:rounded-xl flex items-center justify-center font-bold text-sm sm:text-base md:text-lg shadow-lg">
                         {index + 1}
                       </div>
                     </div>
                     <div className="flex-1 pt-1 sm:pt-2">
-                      <p className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed">{step}</p>
+                      <p className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-gray-200 leading-relaxed">
+                        {step}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -231,7 +258,9 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
                 </div>
                 <div className="text-left">
                   <div className="text-lg font-bold">Try Another</div>
-                  <div className="text-xs opacity-90">New recipe suggestion</div>
+                  <div className="text-xs opacity-90">
+                    New recipe suggestion
+                  </div>
                 </div>
               </div>
             </button>
@@ -241,9 +270,12 @@ export default function RecipeCard({ recipe, onRetry }: RecipeCardProps) {
           {showSuccess && (
             <div className="mt-4 sm:mt-6 p-4 sm:p-6 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-900/30 dark:to-emerald-900/30 border border-green-200 dark:border-green-700/50 rounded-xl sm:rounded-2xl text-center animate-fade-in shadow-lg">
               <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">🎉</div>
-              <h4 className="text-lg sm:text-xl font-bold text-green-800 dark:text-green-300 mb-1 sm:mb-2">Fantastic Choice!</h4>
+              <h4 className="text-lg sm:text-xl font-bold text-green-800 dark:text-green-300 mb-1 sm:mb-2">
+                Fantastic Choice!
+              </h4>
               <p className="text-sm sm:text-base text-green-700 dark:text-green-400">
-                You're all set to create something amazing. Happy cooking, and enjoy every delicious bite!
+                You're all set to create something amazing. Happy cooking, and
+                enjoy every delicious bite!
               </p>
             </div>
           )}

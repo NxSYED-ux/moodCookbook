@@ -1,4 +1,4 @@
-import { useTheme } from '../context/ThemeContext';
+import { useTheme } from "../context/ThemeContext";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -7,15 +7,15 @@ export default function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="fixed top-6 right-6 z-50 w-14 h-14 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300 hover:scale-105 group"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       <div className="relative w-full h-full flex items-center justify-center">
         {/* Sun Icon */}
         <svg
           className={`absolute w-6 h-6 text-yellow-500 transition-all duration-500 ${
-            theme === 'light' 
-              ? 'opacity-100 rotate-0 scale-100' 
-              : 'opacity-0 rotate-180 scale-0'
+            theme === "light"
+              ? "opacity-100 rotate-0 scale-100"
+              : "opacity-0 rotate-180 scale-0"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -30,9 +30,9 @@ export default function ThemeToggle() {
         {/* Moon Icon */}
         <svg
           className={`absolute w-6 h-6 text-blue-400 transition-all duration-500 ${
-            theme === 'dark' 
-              ? 'opacity-100 rotate-0 scale-100' 
-              : 'opacity-0 -rotate-180 scale-0'
+            theme === "dark"
+              ? "opacity-100 rotate-0 scale-100"
+              : "opacity-0 -rotate-180 scale-0"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
