@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import he from "he";
 import { Request, Response } from "express";
 import { Recipe, GetRecipeRequest } from "@shared/api";
 
@@ -24,7 +25,7 @@ export async function handleGetRecipe(req: Request, res: Response): Promise<Resp
         const recipeData = details.data.recipe;
 
         const recipe: Recipe = {
-          name: recipeData.title,
+          name: he.decode(recipeData.title),
           image: recipeData.image_url,
           ingredients: recipeData.ingredients.map(
             (ing: any) =>
@@ -77,10 +78,12 @@ async function askGroqForRecipeName(mood: string, exclude: string[] = []): Promi
     }),
   });
 
-  const data = await response.json();
+  const data = (await response.json()) as any;
+
   if (!data?.choices?.[0]?.message?.content) {
     throw new Error("Groq did not return a recipe name");
   }
+
   return data.choices[0].message.content.trim();
 }
 
@@ -107,7 +110,7 @@ async function askGroqForSteps(title: string, ingredients: string[]): Promise<st
     }),
   });
 
-  const data = await response.json();
+  const data = (await response.json()) as any;
   if (!data?.choices?.[0]?.message?.content) {
     throw new Error("Groq did not return steps");
   }
@@ -125,7 +128,7 @@ async function searchForkify(recipeName: string): Promise<any | null> {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Forkify search failed: ${res.statusText}`);
 
-  const data = await res.json();
+  const data = await res.json() as any;
   return data.data?.recipes?.[0] || null;
 }
 
