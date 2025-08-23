@@ -268,28 +268,7 @@ export default function Results() {
             {/* Combined Back Button and Perfect Recipe Match - Full Width */}
             <div className="w-full mb-6">
               <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
-                {/* Back Button */}
-                <button
-                  onClick={handleBackToMoods}
-                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-md mb-4"
-                >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                    />
-                  </svg>
-                  <span className="text-sm font-medium">All Moods</span>
-                </button>
-
-                {/* Perfect Recipe Match - Full Width */}
+                {/* Perfect Recipe Match with Back Button Inline */}
                 <div className="text-center">
                   <div className="flex items-center justify-center gap-3 mb-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -297,13 +276,38 @@ export default function Results() {
                       Perfect Recipe Match
                     </span>
                   </div>
-                  <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-                    Your{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 capitalize">
-                      {currentMood}
-                    </span>{" "}
-                    mood recipe
-                  </h1>
+
+                  {/* Title with Back Button Inline */}
+                  <div className="flex items-center justify-center gap-4 mb-2">
+                    <button
+                      onClick={handleBackToMoods}
+                      className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-3 py-2 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-md"
+                    >
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                        />
+                      </svg>
+                      <span className="text-sm font-medium">All Moods</span>
+                    </button>
+
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100">
+                      Your{" "}
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 capitalize">
+                        {currentMood}
+                      </span>{" "}
+                      mood recipe
+                    </h1>
+                  </div>
+
                   <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
                     Carefully curated to match your current feelings
                   </p>
