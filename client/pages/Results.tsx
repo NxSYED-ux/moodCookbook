@@ -152,7 +152,7 @@ export default function Results() {
 
   if (state === "error") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-12 transition-colors duration-500">
+      <div className="grid place-items-center min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-12 transition-colors duration-500">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/3 left-1/3 w-56 h-56 bg-gradient-to-br from-red-400/30 to-orange-400/30 rounded-full blur-3xl animate-pulse"></div>
           <div
