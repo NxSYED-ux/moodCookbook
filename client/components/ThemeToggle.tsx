@@ -1,12 +1,16 @@
 import { useTheme } from "../context/ThemeContext";
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  className?: string;
+}
+
+export default function ThemeToggle({ className = "fixed top-6 right-6 z-50" }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
     <button
       onClick={toggleTheme}
-      className="fixed top-6 right-6 z-50 w-14 h-14 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300 hover:scale-105 group"
+      className={`${className} w-14 h-14 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg hover:shadow-xl border border-gray-200/50 dark:border-gray-700/50 transition-all duration-300 hover:scale-105 group`}
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       <div className="relative w-full h-full flex items-center justify-center">
