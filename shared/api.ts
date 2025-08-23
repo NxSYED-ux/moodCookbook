@@ -5,13 +5,6 @@
  */
 
 /**
- * Example response type for /api/demo
- */
-export interface DemoResponse {
-  message: string;
-}
-
-/**
  * Request type for /api/getRecipe
  */
 export interface GetRecipeRequest {
@@ -24,6 +17,8 @@ export interface GetRecipeRequest {
 export interface Recipe {
   name: string;
   image: string;
+  servings: string;
+  readyInMinutes: number;
   ingredients: string[];
   steps: string[];
 }
