@@ -48,9 +48,9 @@ export default function Results() {
     setError("");
 
     try {
-      console.log('Fetching recipe for mood:', mood);
+      console.log("Fetching recipe for mood:", mood);
       const requestBody = { mood };
-      console.log('Request body:', requestBody);
+      console.log("Request body:", requestBody);
 
       const res = await fetch("/api/getRecipe", {
         method: "POST",
@@ -58,23 +58,25 @@ export default function Results() {
         body: JSON.stringify(requestBody),
       });
 
-      console.log('Response status:', res.status);
-      console.log('Response headers:', res.headers);
+      console.log("Response status:", res.status);
+      console.log("Response headers:", res.headers);
 
       if (!res.ok) {
         // Try to get error details from the response
         try {
           const errorData = await res.json();
-          console.error('Server error response:', errorData);
-          throw new Error(`HTTP error! status: ${res.status}, message: ${errorData.error || 'Unknown error'}`);
+          console.error("Server error response:", errorData);
+          throw new Error(
+            `HTTP error! status: ${res.status}, message: ${errorData.error || "Unknown error"}`,
+          );
         } catch (parseError) {
-          console.error('Failed to parse error response:', parseError);
+          console.error("Failed to parse error response:", parseError);
           throw new Error(`HTTP error! status: ${res.status}`);
         }
       }
 
       const data = await res.json();
-      console.log('Recipe data received:', data);
+      console.log("Recipe data received:", data);
       setRecipe(data);
       setState("recipe");
 
@@ -84,7 +86,9 @@ export default function Results() {
       navigate(`/results?${newSearchParams.toString()}`, { replace: true });
     } catch (error) {
       console.error("Error fetching recipe:", error);
-      setError(`Failed to fetch recipe: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again!`);
+      setError(
+        `Failed to fetch recipe: ${error instanceof Error ? error.message : "Unknown error"}. Please try again!`,
+      );
       setState("error");
     }
   };

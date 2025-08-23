@@ -4,7 +4,9 @@ interface ThemeToggleProps {
   className?: string;
 }
 
-export default function ThemeToggle({ className = "fixed top-6 right-6 z-50" }: ThemeToggleProps) {
+export default function ThemeToggle({
+  className = "fixed top-6 right-6 z-50",
+}: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (

@@ -211,33 +211,33 @@ const recipes = {
 
 export const handleGetRecipe: RequestHandler = (req, res) => {
   try {
-    console.log('GetRecipe request received:', {
+    console.log("GetRecipe request received:", {
       body: req.body,
       headers: req.headers,
-      method: req.method
+      method: req.method,
     });
 
     const { mood } = req.body as GetRecipeRequest;
 
-    console.log('Extracted mood:', mood);
+    console.log("Extracted mood:", mood);
 
     if (!mood) {
-      console.log('Error: Mood is missing from request');
+      console.log("Error: Mood is missing from request");
       return res.status(400).json({ error: "Mood is required" });
     }
 
     const moodLower = mood.toLowerCase().trim();
-    console.log('Processed mood:', moodLower);
-    console.log('Available moods:', Object.keys(recipes));
+    console.log("Processed mood:", moodLower);
+    console.log("Available moods:", Object.keys(recipes));
 
     const moodRecipes = recipes[moodLower as keyof typeof recipes];
 
     if (!moodRecipes) {
-      console.log('Error: Invalid mood provided:', moodLower);
+      console.log("Error: Invalid mood provided:", moodLower);
       return res.status(400).json({
         error: "Invalid mood",
         providedMood: moodLower,
-        availableMoods: Object.keys(recipes)
+        availableMoods: Object.keys(recipes),
       });
     }
 
