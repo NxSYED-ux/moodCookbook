@@ -247,14 +247,15 @@ export default function Results() {
         <ThemeToggle />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
-          {/* Header Section */}
+          {/* Header Section - Full Width */}
           <div className="mb-8">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-              {/* Left: Title and Back Button */}
-              <div className="text-center lg:text-left">
+            {/* Combined Back Button and Perfect Recipe Match - Full Width */}
+            <div className="w-full mb-6">
+              <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
+                {/* Back Button */}
                 <button
                   onClick={handleBackToMoods}
-                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-md mb-4 lg:mb-0"
+                  className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-4 py-2 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-md mb-4"
                 >
                   <svg
                     className="w-4 h-4"
@@ -272,8 +273,9 @@ export default function Results() {
                   <span className="text-sm font-medium">All Moods</span>
                 </button>
 
-                <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-2xl p-6 shadow-xl border border-white/20 dark:border-gray-700/20 transition-colors duration-500 inline-block">
-                  <div className="flex items-center gap-3 mb-3">
+                {/* Perfect Recipe Match - Full Width */}
+                <div className="text-center">
+                  <div className="flex items-center justify-center gap-3 mb-3">
                     <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                     <span className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">
                       Perfect Recipe Match
@@ -291,14 +293,14 @@ export default function Results() {
                   </p>
                 </div>
               </div>
+            </div>
 
-              {/* Right: Quick Mood Selector */}
-              <div className="lg:max-w-md">
-                <QuickMoodSelector
-                  currentMood={currentMood}
-                  onSelectMood={handleSelectMood}
-                />
-              </div>
+            {/* Change Your Mood Section - Below Header */}
+            <div className="w-full">
+              <QuickMoodSelector
+                currentMood={currentMood}
+                onSelectMood={handleSelectMood}
+              />
             </div>
           </div>
 
