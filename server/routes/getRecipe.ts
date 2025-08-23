@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 import { Request, Response } from "express";
 import { Recipe, GetRecipeRequest } from "@shared/api";
 
-const GROQ_API_KEY = process.env.VITE_GROQ_API_KEY as string;
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY as string;
 
 export async function handleGetRecipe(req: Request, res: Response): Promise<Response> {
   try {
