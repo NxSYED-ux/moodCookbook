@@ -54,12 +54,12 @@ export default function QuickMoodSelector({
           </p>
         </div>
 
-        <div className="grid grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 justify-items-center">
           {moods.map((mood) => (
             <button
               key={mood.value}
               onClick={() => onSelectMood(mood.value)}
-              className={`group relative flex flex-col items-center justify-center p-4 sm:p-6 rounded-2xl transition-all duration-300 border-2 ${
+              className={`group relative flex flex-col items-center justify-center p-3 sm:p-4 lg:p-6 rounded-2xl transition-all duration-300 border-2 w-full max-w-[140px] ${
                 currentMood === mood.value
                   ? `bg-gradient-to-br ${mood.color} text-white border-transparent shadow-lg shadow-purple-500/25 scale-105`
                   : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-300 hover:shadow-md hover:scale-105"
@@ -67,17 +67,17 @@ export default function QuickMoodSelector({
             >
               {/* Selection indicator */}
               {currentMood === mood.value && (
-                <div className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-lg">
-                  <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <div className="absolute -top-2 -right-2 w-5 h-5 sm:w-6 sm:h-6 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
               )}
 
-              <div className="text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-xl sm:text-2xl lg:text-3xl mb-1 sm:mb-2 group-hover:scale-110 transition-transform duration-300">
                 {mood.emoji}
               </div>
-              <div className="text-sm sm:text-base font-semibold text-center">
+              <div className="text-xs sm:text-sm lg:text-base font-semibold text-center">
                 {mood.text}
               </div>
             </button>
