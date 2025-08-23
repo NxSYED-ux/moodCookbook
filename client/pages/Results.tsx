@@ -252,28 +252,6 @@ export default function Results() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Modern Clean Header */}
           <div className="mb-12">
-            {/* Navigation */}
-            <div className="mb-8">
-              <button
-                onClick={handleBackToMoods}
-                className="group inline-flex items-center gap-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors duration-200"
-              >
-                <svg
-                  className="w-5 h-5 transition-transform group-hover:-translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                  />
-                </svg>
-                <span className="text-sm font-medium">Back to moods</span>
-              </button>
-            </div>
 
             {/* Title Section */}
             <div className="text-center mb-10">
