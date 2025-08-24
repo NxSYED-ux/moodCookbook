@@ -1,19 +1,17 @@
 import "dotenv/config";
 import fetch from "node-fetch";
 import he from "he";
-import { Request, Response } from "express";
-import { Recipe, GetRecipeRequest } from "@shared/api";
 
-const GROQ_API_KEY = process.env.GROQ_API_KEY as string;
+const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
-export async function handleGetRecipe(req: Request, res: Response): Promise<Response> {
+export async function handleGetRecipe(req, res) {
   try {
-    const { mood } = req.body as GetRecipeRequest;
+    const { mood } = req.body;
     if (!mood) {
       return res.status(400).json({ error: "Mood is required" });
     }
 
-    const triedNames: string[] = [];
+    const triedNames = [];
 
     for (let i = 0; i < 3; i++) {
       const recipeName = await askGroqForRecipeName(mood, triedNames);
@@ -25,17 +23,20 @@ export async function handleGetRecipe(req: Request, res: Response): Promise<Resp
         const details = await getRecipeDetails(match.id);
         const recipeData = details.data.recipe;
 
-        const recipe: Recipe = {
+        const recipe = {
           name: he.decode(recipeData.title),
           image: recipeData.image_url,
           ingredients: recipeData.ingredients.map(
-            (ing: any) =>
+            (ing) =>
               `${ing.quantity || ""} ${ing.unit || ""} ${ing.description}`.trim()
           ),
-          steps: await askGroqForSteps(recipeData.title, recipeData.ingredients.map(
-            (ing: any) =>
-              `${ing.quantity || ""} ${ing.unit || ""} ${ing.description}`.trim()
-          )),
+          steps: await askGroqForSteps(
+            recipeData.title,
+            recipeData.ingredients.map(
+              (ing) =>
+                `${ing.quantity || ""} ${ing.unit || ""} ${ing.description}`.trim()
+            )
+          ),
           servings: recipeData.servings || "Unknown",
           readyInMinutes: recipeData.cooking_time || 0,
         };
@@ -53,8 +54,8 @@ export async function handleGetRecipe(req: Request, res: Response): Promise<Resp
   }
 }
 
-// Helper Functions
-async function askGroqForRecipeName(mood: string, exclude: string[] = []): Promise<string> {
+// ---------- Helper Functions ----------
+async function askGroqForRecipeName(mood, exclude = []) {
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -79,7 +80,7 @@ async function askGroqForRecipeName(mood: string, exclude: string[] = []): Promi
     }),
   });
 
-  const data = (await response.json()) as any;
+  const data = await response.json();
 
   if (!data?.choices?.[0]?.message?.content) {
     throw new Error("Groq did not return a recipe name");
@@ -88,7 +89,7 @@ async function askGroqForRecipeName(mood: string, exclude: string[] = []): Promi
   return data.choices[0].message.content.trim();
 }
 
-async function askGroqForSteps(title: string, ingredients: string[]): Promise<string[]> {
+async function askGroqForSteps(title, ingredients) {
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -100,40 +101,41 @@ async function askGroqForSteps(title: string, ingredients: string[]): Promise<st
       messages: [
         {
           role: "system",
-          content: "You are a professional chef AI. Generate concise cooking instructions as clear step-by-step numbered steps. Return only the steps, no extra commentary."
+          content:
+            "You are a professional chef AI. Generate concise cooking instructions as clear step-by-step numbered steps. Return only the steps, no extra commentary.",
         },
         {
           role: "user",
-          content: `Recipe: ${title}\nIngredients: ${ingredients.join(", ")}\n\nWrite cooking steps.`
-        }
+          content: `Recipe: ${title}\nIngredients: ${ingredients.join(", ")}\n\nWrite cooking steps.`,
+        },
       ],
       temperature: 0.7,
     }),
   });
 
-  const data = (await response.json()) as any;
+  const data = await response.json();
   if (!data?.choices?.[0]?.message?.content) {
     throw new Error("Groq did not return steps");
   }
 
   return data.choices[0].message.content
     .split(/\n+/)
-    .map((s: string) => s.replace(/^\d+[\).\s-]*/, "").trim())
-    .filter((s: string) => s.length > 0);
+    .map((s) => s.replace(/^\d+[\).\s-]*/, "").trim())
+    .filter((s) => s.length > 0);
 }
 
-async function searchForkify(recipeName: string): Promise<any | null> {
+async function searchForkify(recipeName) {
   const url = `https://forkify-api.herokuapp.com/api/v2/recipes?search=${encodeURIComponent(
     recipeName
   )}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Forkify search failed: ${res.statusText}`);
 
-  const data = await res.json() as any;
+  const data = await res.json();
   return data.data?.recipes?.[0] || null;
 }
 
-async function getRecipeDetails(recipeId: string): Promise<any> {
+async function getRecipeDetails(recipeId) {
   const url = `https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Forkify detail fetch failed: ${res.statusText}`);

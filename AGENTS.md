@@ -22,7 +22,7 @@ client/                   # React SPA frontend
 └── global.css            # TailwindCSS 3 theming and global styles
 
 server/                   # Express API backend
-├── index.ts              # Main server setup (express config + routes)
+├── index.js              # Main server setup (express config + routes)
 └── routes/               # API handlers
 
 shared/                   # Types used by both client & server
@@ -125,7 +125,7 @@ export const handleMyRoute: RequestHandler = (req, res) => {
 };
 ```
 
-3. Register the route in `server/index.ts`:
+3. Register the route in `server/index.js`:
 ```typescript
 import { handleMyRoute } from "./routes/my-route";
 

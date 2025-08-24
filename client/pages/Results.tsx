@@ -48,11 +48,10 @@ export default function Results() {
     setError("");
 
     try {
-      console.log("Fetching recipe for mood:", mood);
+      const apiUrl = import.meta.env.VITE_API_URL;
       const requestBody = { mood };
-      console.log("Request body:", requestBody);
 
-      const res = await fetch("/api/getRecipe", {
+      const res = await fetch(`${apiUrl}/api/getRecipe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
