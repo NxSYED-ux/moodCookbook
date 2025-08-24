@@ -1,17 +1,20 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import http from "http";
 import { handleGetRecipe } from "./routes/getRecipe";
 
-export function createServer() {
-  const app = express();
+const port = process.env.PORT || 7000;
 
-  // Middleware
-  app.use(cors());
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+const app = express();
+const server = http.createServer(app);
 
-  app.post("/api/getRecipe", handleGetRecipe);
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
-  return app;
-}
+app.post("/api/getRecipe", handleGetRecipe);
+
+server.listen(port, () => {
+  console.log(`Listening on port number ${port}`);
+});
