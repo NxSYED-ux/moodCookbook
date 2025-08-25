@@ -1,8 +1,5 @@
-import "dotenv/config";
 import fetch from "node-fetch";
 import he from "he";
-
-const GROQ_API_KEY = process.env.GROQ_API_KEY;
 
 export async function handleGetRecipe(req, res) {
   try {
@@ -56,6 +53,7 @@ export async function handleGetRecipe(req, res) {
 
 // ---------- Helper Functions ----------
 async function askGroqForRecipeName(mood, exclude = []) {
+  const GROQ_API_KEY = process.env.GROQ_API_KEY;
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -81,7 +79,7 @@ async function askGroqForRecipeName(mood, exclude = []) {
   });
 
   const data = await response.json();
-
+  
   if (!data?.choices?.[0]?.message?.content) {
     throw new Error("Groq did not return a recipe name");
   }
@@ -90,6 +88,7 @@ async function askGroqForRecipeName(mood, exclude = []) {
 }
 
 async function askGroqForSteps(title, ingredients) {
+  const GROQ_API_KEY = process.env.GROQ_API_KEY;
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {

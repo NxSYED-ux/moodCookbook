@@ -1,16 +1,20 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import { handleGetRecipe } from "./routes/getRecipe.js"; // note the .js extension
-
-const port = process.env.PORT || 7070;
+import { handleGetRecipe } from "./routes/getRecipe.js";
 
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Load environment variables from base folder
+dotenv.config({ path: path.resolve(__dirname, "../.env") });
+
+// Now read port from env
+const port = process.env.PORT || 7000;
 
 // Express app
 const app = express();
@@ -28,14 +32,14 @@ app.use(express.static(distPath));
 // API routes
 app.post("/api/getRecipe", handleGetRecipe);
 
+// Fallback to index.html for SPA routing
 app.use((_, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
+console.log("Loaded env keys:", Object.keys(process.env));
 
 // Start server
 server.listen(port, () => {
-  console.log(`🚀 MoodCookbook server running on port ${port}`);
-  console.log(`📱 Frontend: http://localhost:${port}`);
-  console.log(`🔧 API: http://localhost:${port}/api`);
+  console.log(`MoodCookbook server running on port ${port}`);
 });
