@@ -5,13 +5,6 @@
  */
 
 /**
- * Request type for /api/getRecipe
- */
-export interface GetRecipeRequest {
-  mood: string;
-}
-
-/**
  * Response type for /api/getRecipe
  */
 export interface Recipe {
