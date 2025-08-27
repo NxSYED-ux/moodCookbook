@@ -25,16 +25,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve frontend build
-const distPath = path.join(__dirname, "../spa");
-app.use(express.static(distPath));
-
 // API routes
 app.post("/api/getRecipe", handleGetRecipe);
 
-// Fallback to index.html for SPA routing
-app.use((_, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
 console.log("Loaded env keys:", Object.keys(process.env));
