@@ -142,28 +142,6 @@ export default function Results() {
           </div>
 
           <Loader />
-
-          <div className="text-center mt-8">
-            <button
-              onClick={handleBackToMoods}
-              className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-gray-100 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm px-6 py-3 rounded-full transition-all duration-200 hover:bg-white/90 dark:hover:bg-gray-700/90 shadow-lg hover:shadow-xl"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              <span className="font-semibold">Change Mood</span>
-            </button>
-          </div>
         </div>
       </div>
     );

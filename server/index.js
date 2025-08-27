@@ -32,8 +32,6 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-console.log("Loaded env keys:", Object.keys(process.env));
-
 // Start server
 server.listen(port, () => {
   console.log(`MoodCookbook server running on port ${port}`);
