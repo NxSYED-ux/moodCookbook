@@ -46,10 +46,10 @@ export default function QuickMoodSelector({
     <div className={`${className}`}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
             Change Your Mood
           </h3>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-600 dark:text-gray-400">
             Not feeling the same? Pick a different mood for new recipes
           </p>
         </div>
