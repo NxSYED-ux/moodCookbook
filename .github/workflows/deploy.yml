@@ -10,17 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout workflow repo (optional, mostly for actions itself)
-      - name: Checkout code
+      # 1️⃣ Checkout repo on GitHub runner (needed for github.repository info)
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      # 2️⃣ Setup Node.js on GitHub runner (optional, for scripts needing Node)
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-
-      # 3️⃣ Deploy to EC2 via SSH
+      # 2️⃣ Deploy to EC2 via SSH
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -28,30 +22,30 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            set -ex  # exit on error, print commands
+            set -ex  # Exit on error & print each command
 
-            echo "Changing to project directory..."
+            echo "=== Changing to project directory ==="
             cd /home/ubuntu/moodCookbook
 
-            echo "Cleaning previous changes..."
+            echo "=== Cleaning previous changes ==="
             git reset --hard
             git clean -fd
 
-            echo "Pulling latest code from private repo..."
+            echo "=== Pulling latest code from private repo ==="
             git pull https://${{ secrets.GITHUB_USER_DEPLOY }}:${{ secrets.GITHUB_TOKEN_DEPLOY }}@github.com/${{ github.repository }} main
 
-            echo "Installing backend dependencies..."
-            npm install
+            echo "=== Installing backend dependencies ==="
+            /usr/bin/npm install
 
-            echo "Building frontend..."
+            echo "=== Building frontend ==="
             cd /home/ubuntu/moodCookbook/dist/spa || exit 1
-            npm install || true
-            npm run build
+            /usr/bin/npm install || true
+            /usr/bin/npm run build
 
-            echo "Restarting PM2 backend..."
-            pm2 restart backend || pm2 start /home/ubuntu/moodCookbook/server.js --name backend
+            echo "=== Restarting PM2 backend ==="
+            /usr/bin/pm2 restart backend || /usr/bin/pm2 start /home/ubuntu/moodCookbook/server.js --name backend
 
-            echo "Reloading Nginx..."
+            echo "=== Reloading Nginx ==="
             sudo systemctl reload nginx
 
-            echo "✅ Deployment completed!"
+            echo "✅ Deployment completed successfully!"
