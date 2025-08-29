@@ -31,7 +31,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.get("*", (req, res) => {
+app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
 
