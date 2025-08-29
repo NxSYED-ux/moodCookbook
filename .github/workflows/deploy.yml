@@ -1,24 +1,38 @@
-uses: appleboy/ssh-action@v0.1.6
-with:
-  host: ${{ secrets.EC2_HOST }}
-  username: ${{ secrets.EC2_USER }}
-  key: ${{ secrets.EC2_KEY }}
-  script: |
-    set -e   # exit on first error
-    cd /home/ubuntu/moodCookbook
-    echo "Resetting repo..."
-    git reset --hard
-    git clean -fd
-    echo "Pulling latest code..."
-    git pull origin main
-    echo "Installing backend..."
-    npm install
-    echo "Building frontend..."
-    cd /home/ubuntu/moodCookbook/dist/spa || exit 1
-    npm install || true
-    npm run build
-    echo "Restarting PM2 backend..."
-    pm2 restart backend || pm2 start server.js --name backend
-    echo "Reloading Nginx..."
-    sudo systemctl reload nginx
-    echo "Deployment complete!"
+name: CI/CD Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            set -ex
+            cd /home/ubuntu/moodCookbook
+            git reset --hard
+            git clean -fd
+            git pull origin main
+            npm install
+            cd /home/ubuntu/moodCookbook/dist/spa || exit 1
+            npm install || true
+            npm run build
+            pm2 restart backend || pm2 start server.js --name backend
+            sudo systemctl reload nginx
