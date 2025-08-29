@@ -26,7 +26,7 @@ jobs:
             cd /home/ubuntu/moodCookbook
             git reset --hard
             git clean -fd
-            git pull https://${{ secrets.GITHUB_USER_DEPLOY }}:${{ secrets.GITHUB_TOKEN_DEPLOY }}@github.com/NxSYED-ux/moodCookbook.git main
+            git pull https://${{ secrets.GIT_HUB_USER_DEPLOY }}:${{ secrets.GIT_HUB_TOKEN_DEPLOY }}@github.com/NxSYED-ux/moodCookbook.git main
             /usr/bin/npm install
             cd /home/ubuntu/moodCookbook/dist/spa || exit 1
             /usr/bin/npm install || true
