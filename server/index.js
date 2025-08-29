@@ -32,7 +32,12 @@ app.get("/api/health", (req, res) => {
 });
 
 app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
+  res.sendFile(path.join(frontendPath, "index.html"), (err) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Something went wrong');
+    }
+  });
 });
 
 // Start server
