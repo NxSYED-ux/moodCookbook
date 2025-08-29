@@ -4,13 +4,21 @@ with:
   username: ${{ secrets.EC2_USER }}
   key: ${{ secrets.EC2_KEY }}
   script: |
-    cd ~/moodCookbook
+    set -e   # exit on first error
+    cd /home/ubuntu/moodCookbook
+    echo "Resetting repo..."
     git reset --hard
     git clean -fd
+    echo "Pulling latest code..."
     git pull origin main
+    echo "Installing backend..."
     npm install
-    cd dist/spa || true
+    echo "Building frontend..."
+    cd /home/ubuntu/moodCookbook/dist/spa || exit 1
     npm install || true
     npm run build
-    pm2 restart backend || pm2 start index.js --name backend
+    echo "Restarting PM2 backend..."
+    pm2 restart backend || pm2 start server.js --name backend
+    echo "Reloading Nginx..."
     sudo systemctl reload nginx
+    echo "Deployment complete!"
