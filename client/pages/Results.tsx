@@ -48,11 +48,9 @@ export default function Results() {
     setError("");
 
     try {
-      // @ts-ignore
-      const apiUrl = import.meta.env.VITE_API_URL;
       const requestBody = { mood };
 
-      const res = await fetch(`${apiUrl}/api/getRecipe`, {
+      const res = await fetch("/api/getRecipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
@@ -235,7 +233,7 @@ export default function Results() {
             <div className="text-center mb-8 sm:mb-10">
               <div className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                Perfect Match Found
+                Perfect Match Not Found
               </div>
 
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 tracking-tight">
