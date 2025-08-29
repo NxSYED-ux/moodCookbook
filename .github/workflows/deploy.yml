@@ -1,0 +1,16 @@
+uses: appleboy/ssh-action@v0.1.6
+with:
+  host: ${{ secrets.EC2_HOST }}
+  username: ${{ secrets.EC2_USER }}
+  key: ${{ secrets.EC2_KEY }}
+  script: |
+    cd ~/moodCookbook
+    git reset --hard
+    git clean -fd
+    git pull origin main
+    npm install
+    cd dist/spa || true
+    npm install || true
+    npm run build
+    pm2 restart backend || pm2 start server.js --name backend
+    sudo systemctl reload nginx
