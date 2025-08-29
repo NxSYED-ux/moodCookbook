@@ -12,5 +12,5 @@ with:
     cd dist/spa || true
     npm install || true
     npm run build
-    pm2 restart backend || pm2 start server.js --name backend
+    pm2 restart backend || pm2 start index.js --name backend
     sudo systemctl reload nginx
