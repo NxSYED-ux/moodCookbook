@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Checkout workflow repo (optional, mostly for actions itself)
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2️⃣ Setup Node.js on GitHub runner (optional, for scripts needing Node)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
+      # 3️⃣ Deploy to EC2 via SSH
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@v0.1.6
         with:
@@ -25,14 +28,30 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            set -ex
+            set -ex  # exit on error, print commands
+
+            echo "Changing to project directory..."
             cd /home/ubuntu/moodCookbook
+
+            echo "Cleaning previous changes..."
             git reset --hard
             git clean -fd
-            git pull origin main
+
+            echo "Pulling latest code from private repo..."
+            git pull https://${{ secrets.GITHUB_USER_DEPLOY }}:${{ secrets.GITHUB_TOKEN_DEPLOY }}@github.com/${{ github.repository }} main
+
+            echo "Installing backend dependencies..."
             npm install
+
+            echo "Building frontend..."
             cd /home/ubuntu/moodCookbook/dist/spa || exit 1
             npm install || true
             npm run build
-            pm2 restart backend || pm2 start server.js --name backend
+
+            echo "Restarting PM2 backend..."
+            pm2 restart backend || pm2 start /home/ubuntu/moodCookbook/server.js --name backend
+
+            echo "Reloading Nginx..."
             sudo systemctl reload nginx
+
+            echo "✅ Deployment completed!"
