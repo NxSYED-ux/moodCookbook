@@ -54,6 +54,7 @@ export async function handleGetRecipe(req, res) {
 // ---------- Helper Functions ----------
 async function askGroqForRecipeName(mood, exclude = []) {
   const GROQ_API_KEY = process.env.GROQ_API_KEY;
+  console.log("GROQ_API_KEY:", GROQ_API_KEY);
   const { data } = await axios.post(
     "https://api.groq.com/openai/v1/chat/completions",
     {
