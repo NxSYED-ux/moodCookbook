@@ -4,7 +4,7 @@ import cors from "cors";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import mongodbConnection from "./config/connection.js";
+// import mongodbConnection from "./config/connection.js";
 import authRoutes from "./routes/auth.js";
 import getRecipeRoutes from "./routes/recipe.js";
 
@@ -21,7 +21,7 @@ const app = express();
 const server = http.createServer(app);
 
 // Database Connection
-mongodbConnection();
+// mongodbConnection();
 
 // Middleware
 app.use(cors());
