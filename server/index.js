@@ -4,28 +4,36 @@ import cors from "cors";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import { handleGetRecipe } from "./routes/getRecipe.js";
+import mongodbConnection from "./config/connection.js";
+import authRoutes from "./routes/auth.js";
+import getRecipeRoutes from "./routes/recipe.js";
 
 // Fix __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load environment variables
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+const envFile = process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env.local';
+dotenv.config({ path: path.resolve(__dirname, `../${envFile}`) });
 
 const port = process.env.PORT || 7000;
 const app = express();
 const server = http.createServer(app);
+
+// Database Connection
+mongodbConnection();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Frontend Path
 const frontendPath = path.join(__dirname, "dist/spa");
 app.use(express.static(frontendPath));
 
-app.post("/api/getRecipe", handleGetRecipe);
+app.use('/api/auth/', authRoutes);
+app.use("/api/recipe", getRecipeRoutes);
 
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
