@@ -56,9 +56,6 @@ export default function Results() {
         body: JSON.stringify(requestBody),
       });
 
-      console.log("Response status:", res.status);
-      console.log("Response headers:", res.headers);
-
       if (!res.ok) {
         // Try to get error details from the response
         try {
