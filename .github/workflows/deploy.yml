@@ -28,12 +28,13 @@ jobs:
 
             # Create fresh .env
             cat > .env <<EOL
-NODE_ENV=production
-PORT=${{ secrets.PORT }}
-GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
-DB_URI=${{ secrets.DB_URI }}
-JWT_SECRET=${{ secrets.JWT_SECRET }}
+            NODE_ENV=production
+            PORT=${{ secrets.PORT }}
+            GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
+            DB_URI=${{ secrets.DB_URI }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
             EOL
+  
   
           # Install backend dependencies
           npm install || true
