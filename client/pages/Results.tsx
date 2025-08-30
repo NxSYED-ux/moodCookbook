@@ -50,7 +50,7 @@ export default function Results() {
     try {
       const requestBody = { mood };
 
-      const res = await fetch("/api/getRecipe", {
+      const res = await fetch("/api/recipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(requestBody),
