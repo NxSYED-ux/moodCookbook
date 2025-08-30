@@ -40,12 +40,7 @@ jobs:
             npm install
             
             # Build frontend
-            if [ -d client ]; then
-            cd client
-            npm install
             npm run build
-            cd ..
-            fi
             
             # Restart backend with updated environment
             pm2 restart backend --update-env || pm2 start /home/ubuntu/moodCookbook/index.js --name backend --update-env
