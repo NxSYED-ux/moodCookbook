@@ -71,7 +71,7 @@ export default function MoodSelector({ onSelectMood }: MoodSelectorProps) {
           <div className="inline-flex items-center gap-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8 shadow-lg transition-colors duration-500">
             <span className="text-xl sm:text-2xl">🍳</span>
             <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
-              AI-Powered Recipe Matching Shit
+              AI-Powered Recipe Matching
             </span>
           </div>
 
