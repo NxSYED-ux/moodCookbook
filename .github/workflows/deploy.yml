@@ -27,7 +27,7 @@ jobs:
             git pull https://${{ secrets.GIT_HUB_USER_DEPLOY }}:${{ secrets.GIT_HUB_TOKEN_DEPLOY }}@github.com/NxSYED-ux/moodCookbook.git main
 
             # Create fresh .env
-            cat > .env <<EOL
+            cat > .env.production <<EOL
             NODE_ENV=production
             PORT=${{ secrets.PORT }}
             GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
