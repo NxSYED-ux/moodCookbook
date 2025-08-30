@@ -26,7 +26,7 @@ jobs:
             git clean -fd
             git pull https://${{ secrets.GIT_HUB_USER_DEPLOY }}:${{ secrets.GIT_HUB_TOKEN_DEPLOY }}@github.com/NxSYED-ux/moodCookbook.git main
 
-            # Create fresh .env
+          # Create fresh .env
             cat > .env <<EOL
             NODE_ENV=production
             PORT=${{ secrets.PORT }}
@@ -37,18 +37,18 @@ jobs:
   
   
           # Install backend dependencies
-          npm install || true
-          
+            npm install
+            
           # Build frontend
-          if [ -d client ]; then
-          cd client
-          npm install
-          npm run build
-          cd ..
-          fi
-          
+            if [ -d client ]; then
+            cd client
+            npm install
+            npm run build
+            cd ..
+            fi
+            
           # Restart backend with updated environment
-          pm2 restart backend --update-env || pm2 start /home/ubuntu/moodCookbook/index.js --name backend --update-env
-          
+            pm2 restart backend --update-env || pm2 start /home/ubuntu/moodCookbook/index.js --name backend --update-env
+            
           # Reload Nginx
-          sudo systemctl reload nginx
+            sudo systemctl reload nginx
