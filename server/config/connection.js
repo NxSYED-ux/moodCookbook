@@ -19,7 +19,7 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&tls=true`;
             
             // Use the correct certificate path
             const certPath = path.resolve(__dirname, "../../../certs/global-bundle.pem");
@@ -31,20 +31,11 @@ const mongodbConnection = async () => {
             }
             
             console.log("📋 Using certificate from:", certPath);
-            const ca = fs.readFileSync(certPath);
             
-            options = {
-                tls: true,
-                tlsCAFile: certPath, // Use the file path directly
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            };
+            // Add TLS options for AWS DocumentDB
+            options.tlsCAFile = certPath;
         } else {
             URI = `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`;
-            options = {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            };
         }
         
         await mongoose.connect(URI, options);
