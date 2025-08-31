@@ -12,7 +12,8 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+            // Add authMechanism=SCRAM-SHA-1 in the URI
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authMechanism=SCRAM-SHA-1`;
             
             options = {
                 tls: true,
@@ -23,9 +24,9 @@ const mongodbConnection = async () => {
         }
         
         await mongoose.connect(URI, options);
-        console.log(`MongoDB Connected (${env})`);
+        console.log(`✅ MongoDB Connected (${env})`);
     } catch (err) {
-        console.error("MongoDB Connection Error:", err.message);
+        console.error("❌ MongoDB Connection Error:", err);
         process.exit(1);
     }
 };
