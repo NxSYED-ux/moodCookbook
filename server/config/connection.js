@@ -13,7 +13,7 @@ const mongodbConnection = async () => {
             const dbName = process.env.DB_NAME;
             
             // Add authMechanism=SCRAM-SHA-1 in the URI
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authMechanism=SCRAM-SHA-1`;
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin&authMechanism=SCRAM-SHA-1`;
             
             options = {
                 tls: true,
