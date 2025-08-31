@@ -20,7 +20,7 @@ const mongodbConnection = async () => {
             options = {
                 tls: true,
                 tlsCAFile: pemPath,
-                tlsAllowInvalidCertificates: false, // production should validate the cert
+                tlsAllowInvalidCertificates: false,
                 serverSelectionTimeoutMS: 30000,
             };
         } else {
@@ -33,7 +33,7 @@ const mongodbConnection = async () => {
         await mongoose.connect(URI, options);
         console.log(`✅ MongoDB Connected (${env})`);
     } catch (err) {
-        console.error("❌ MongoDB Connection Error:", err);
+        console.error("MongoDB Connection Error:", err);
         console.error("Stack Trace:", err.stack);
         process.exit(1);
     }
