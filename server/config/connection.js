@@ -16,7 +16,7 @@ const mongodbConnection = async () => {
             
             options = {
                 tls: true,
-                tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
+                tlsCAFile: "/home/ubuntu/moodCookbook/server/certs/global-bundle.pem",
             };
         } else {
             const host = process.env.DB_HOST;
