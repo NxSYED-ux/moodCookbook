@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
-import fs from "fs";
 
 const mongodbConnection = async () => {
     try {
         const env = process.env.NODE_ENV;
-        
         let URI;
         
         if (env === "production") {
@@ -13,19 +11,17 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?tls=true&tlsCAFile=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+            const pemPath = "/home/ubuntu/certs/global-bundle.pem";
+            
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?tls=true&tlsCAFile=${pemPath}&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
         } else {
-            // Use local MongoDB
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
             URI = `mongodb://${host}:27017/${dbName}`;
         }
         
-        await mongoose.connect(URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        await mongoose.connect(URI);
         console.log(`MongoDB Connected (${env})`);
     } catch (err) {
         console.error(err.message);
