@@ -14,6 +14,7 @@ const mongodbConnection = async () => {
             const pemPath = "/home/ubuntu/certs/global-bundle.pem";
             
             URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?tls=true&tlsCAFile=${pemPath}&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+        
         } else {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
