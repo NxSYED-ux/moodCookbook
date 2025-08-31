@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const mongodbConnection = async () => {
     try {
-        const env = process.env.NODE_ENV || "development";
+        const env = process.env.NODE_ENV;
         let URI;
         let options = {};
         
@@ -12,29 +12,20 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            // Absolute path to PEM file
-            const pemPath = "/home/ubuntu/certs/global-bundle.pem";
-            
             URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
             options = {
                 tls: true,
-                tlsCAFile: pemPath,
-                tlsAllowInvalidCertificates: false,
-                serverSelectionTimeoutMS: 30000,
+                tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
             };
         } else {
-            // Local MongoDB
-            const host = process.env.DB_HOST || "localhost";
-            const dbName = process.env.DB_NAME || "moodCookBook";
-            URI = `mongodb://${host}:27017/${dbName}`;
+            URI = `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`;
         }
         
         await mongoose.connect(URI, options);
         console.log(`✅ MongoDB Connected (${env})`);
     } catch (err) {
-        console.error("MongoDB Connection Error:", err);
-        console.error("Stack Trace:", err.stack);
+        console.error("❌ MongoDB Connection Error:", err);
         process.exit(1);
     }
 };
