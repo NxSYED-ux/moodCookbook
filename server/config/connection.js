@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import fs from "fs";
 
 const mongodbConnection = async () => {
     try {
@@ -16,9 +15,8 @@ const mongodbConnection = async () => {
             URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
             options = {
-                ssl: true,
-                sslValidate: true,
-                sslCA: fs.readFileSync("/home/ubuntu/certs/global-bundle.pem"),
+                tls: true,
+                tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
             };
         } else {
             const host = process.env.DB_HOST;
@@ -27,9 +25,9 @@ const mongodbConnection = async () => {
         }
         
         await mongoose.connect(URI, options);
-        console.log(`MongoDB Connected (${env})`);
+        console.log(`✅ MongoDB Connected (${env})`);
     } catch (err) {
-        console.error("MongoDB Connection Error:", err.message);
+        console.error("❌ MongoDB Connection Error:", err.message);
         process.exit(1);
     }
 };
