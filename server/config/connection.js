@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import fs from "fs";
 
 const mongodbConnection = async () => {
     try {
         const env = process.env.NODE_ENV;
         let URI;
+        let options = {};
         
         if (env === "production") {
             const user = encodeURIComponent(process.env.DB_USER);
@@ -13,19 +15,29 @@ const mongodbConnection = async () => {
             
             const pemPath = "/home/ubuntu/certs/global-bundle.pem";
             
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?tls=true&tlsCAFile=${pemPath}&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
-        
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+            
+            options = {
+                tls: true,
+                tlsCAFile: pemPath, // cert path
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            };
         } else {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
             URI = `mongodb://${host}:27017/${dbName}`;
+            options = {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            };
         }
         
-        await mongoose.connect(URI);
+        await mongoose.connect(URI, options);
         console.log(`MongoDB Connected (${env})`);
     } catch (err) {
-        console.error(err.message);
+        console.error("MongoDB Connection Error:", err.message);
         process.exit(1);
     }
 };
