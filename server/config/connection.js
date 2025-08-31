@@ -12,9 +12,9 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            const URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin`;
+            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin`;
             
-            const options = {
+            options = {
                 tls: true,
                 tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
             };
