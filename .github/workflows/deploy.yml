@@ -31,8 +31,11 @@ jobs:
             NODE_ENV=production
             PORT=${{ secrets.PORT }}
             GROQ_API_KEY=${{ secrets.GROQ_API_KEY }}
-            DB_URI=${{ secrets.DB_URI }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
+            DB_USER=${{ secrets.DB_USER }}
+            DB_PASS=${{ secrets.DB_PASS }}
+            DB_HOST=${{ secrets.DB_HOST }}
+            DB_NAME=${{ secrets.DB_NAME }}
             EOL
   
   
