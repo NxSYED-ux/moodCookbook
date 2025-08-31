@@ -34,9 +34,8 @@ const mongodbConnection = async () => {
             const ca = fs.readFileSync(certPath);
             
             options = {
-                ssl: true,
-                sslValidate: true,
-                sslCA: ca,
+                tls: true,
+                tlsCAFile: certPath, // Use the file path directly
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
             };
