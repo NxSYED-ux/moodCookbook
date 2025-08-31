@@ -12,10 +12,9 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            // Add authMechanism=SCRAM-SHA-1 in the URI
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin&authMechanism=SCRAM-SHA-1`;
+            const URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin`;
             
-            options = {
+            const options = {
                 tls: true,
                 tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
             };
