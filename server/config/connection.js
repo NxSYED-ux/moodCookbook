@@ -10,10 +10,8 @@ const mongodbConnection = async () => {
             const user = encodeURIComponent(process.env.DB_USER);
             const pass = encodeURIComponent(process.env.DB_PASS);
             const host = process.env.DB_HOST;
-            const dbName = process.env.DB_NAME;
             
-            // Add authSource=admin
-            URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false&authSource=admin`;
+            URI = `mongodb://${user}:${pass}@${host}:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
             options = {
                 tls: true,
