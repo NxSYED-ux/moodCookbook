@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import fs from "fs";
 
 const mongodbConnection = async () => {
     try {
@@ -15,8 +16,9 @@ const mongodbConnection = async () => {
             URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
             options = {
-                tls: true,
-                tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
+                ssl: true,
+                sslValidate: true,
+                sslCA: fs.readFileSync("/home/ubuntu/certs/global-bundle.pem"),
             };
         } else {
             const host = process.env.DB_HOST;
