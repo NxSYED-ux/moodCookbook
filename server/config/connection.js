@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import fs from "fs";
 
 const mongodbConnection = async () => {
     try {
@@ -19,19 +18,13 @@ const mongodbConnection = async () => {
             
             options = {
                 tls: true,
-                tlsCAFile: pemPath, // cert path
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
+                tlsCAFile: pemPath,
             };
         } else {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
             URI = `mongodb://${host}:27017/${dbName}`;
-            options = {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            };
         }
         
         await mongoose.connect(URI, options);
