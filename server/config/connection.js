@@ -12,18 +12,15 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
             
-            const pemPath = "/home/ubuntu/certs/global-bundle.pem";
-            
             URI = `mongodb://${user}:${pass}@${host}:27017/${dbName}?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
             options = {
                 tls: true,
-                tlsCAFile: pemPath,
+                tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
             };
         } else {
             const host = process.env.DB_HOST;
             const dbName = process.env.DB_NAME;
-            
             URI = `mongodb://${host}:27017/${dbName}`;
         }
         
