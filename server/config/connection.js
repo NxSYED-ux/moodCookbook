@@ -61,9 +61,7 @@ const mongodbConnection = async () => {
             const certContent = fs.readFileSync(certPath);
             
             options = {
-                ssl: true,
-                sslValidate: true,
-                sslCA: certContent,
+                tlsCAFile: certContent,
             };
         } else {
             URI = `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`;
