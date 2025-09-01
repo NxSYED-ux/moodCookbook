@@ -16,6 +16,7 @@ const mongodbConnection = async () => {
             options = {
                 tls: true,
                 tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
+                authSource: 'admin',
             };
         } else {
             URI = `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`;

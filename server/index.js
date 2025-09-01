@@ -20,7 +20,7 @@ const app = express();
 const server = http.createServer(app);
 
 // Database Connection
-// await mongodbConnection();
+await mongodbConnection();
 
 // Middleware
 app.use(cors());
