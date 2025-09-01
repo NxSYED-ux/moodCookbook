@@ -12,6 +12,7 @@ const mongodbConnection = async () => {
             const host = process.env.DB_HOST;
             
             URI = `mongodb://${user}:${pass}@${host}:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
+            console.log('MongoDB URI:', URI);
             
             options = {
                 tls: true,
@@ -23,7 +24,6 @@ const mongodbConnection = async () => {
         
         await mongoose.connect(URI, options);
         console.log(`MongoDB Connected (${env})`);
-        console.log(`Finally`);
     } catch (err) {
         console.error("MongoDB Connection Error:", err.message);
         process.exit(1);
