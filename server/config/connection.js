@@ -11,13 +11,13 @@ const mongodbConnection = async () => {
             const pass = encodeURIComponent(process.env.DB_PASS);
             const host = process.env.DB_HOST;
             
+            console.log('password: ', password);
+            
             URI = `mongodb://${user}:${pass}@${host}:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
-            console.log(`MongoDB URI: ${URI}`);
             
             options = {
                 tls: true,
                 tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
-                authSource: 'admin',
             };
         } else {
             URI = `mongodb://${process.env.DB_HOST}:27017/${process.env.DB_NAME}`;
