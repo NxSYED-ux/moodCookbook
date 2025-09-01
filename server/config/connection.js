@@ -23,6 +23,7 @@ const mongodbConnection = async () => {
         
         await mongoose.connect(URI, options);
         console.log(`MongoDB Connected (${env})`);
+        console.log(`Finally`);
     } catch (err) {
         console.error("MongoDB Connection Error:", err.message);
         process.exit(1);
