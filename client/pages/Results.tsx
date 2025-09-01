@@ -71,7 +71,6 @@ export default function Results() {
       }
 
       const data = await res.json();
-      console.log("Recipe data received:", data);
       setRecipe(data);
       setState("recipe");
 
