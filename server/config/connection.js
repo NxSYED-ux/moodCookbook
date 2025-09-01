@@ -11,7 +11,7 @@ const mongodbConnection = async () => {
             const pass = encodeURIComponent(process.env.DB_PASS);
             const host = process.env.DB_HOST;
             
-            console.log('password: ', password);
+            console.log('password: ', pass);
             
             URI = `mongodb://${user}:${pass}@${host}:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             
