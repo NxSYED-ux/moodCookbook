@@ -14,6 +14,7 @@ const mongodbConnection = async () => {
             URI = `mongodb://${user}:${pass}@${host}:27017/?replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false`;
             console.log('MongoDB URI:', URI);
             
+            
             options = {
                 tls: true,
                 tlsCAFile: "/home/ubuntu/certs/global-bundle.pem",
