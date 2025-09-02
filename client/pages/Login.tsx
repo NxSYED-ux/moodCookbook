@@ -46,7 +46,7 @@ const Login: React.FC = () => {
       if (data.success) {
         window.location.href = '/';
       } else {
-        setError(data.error || 'Login failed');
+        setError(data.message || 'Login failed');
       }
     } catch (err) {
       setError('Network error. Please try again.');
