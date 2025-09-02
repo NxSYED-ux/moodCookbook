@@ -56,3 +56,36 @@ export const login = async (req, res) => {
         return errorResponse(res, 500, 'Internal server error');
     }
 };
+
+export const register = async (req, res) => {
+    try {
+        const { firstName, lastName, email, password } = req.body;
+        
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "Email already registered" });
+        }
+        
+        // Create new user
+        const user = new User({
+            firstName,
+            lastName,
+            email,
+            password,
+            role: "User",
+        });
+        
+        await user.save();
+        
+        const { password: _, ...userData } = user.toObject();
+        
+        res.status(201).json({
+            message: "User registered successfully",
+            user: userData
+        });
+        
+    } catch (err) {
+        console.error("Register Error:", err);
+        res.status(500).json({ message: "Server error", error: err.message });
+    }
+};
