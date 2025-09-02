@@ -63,7 +63,7 @@ export const register = async (req, res) => {
         
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: "Email already registered" });
+            return errorResponse(res, 400, 'Email already registered');
         }
         
         // Create new user
@@ -80,12 +80,13 @@ export const register = async (req, res) => {
         const { password: _, ...userData } = user.toObject();
         
         res.status(201).json({
+            success: true,
             message: "User registered successfully",
             user: userData
         });
         
     } catch (err) {
         console.error("Register Error:", err);
-        res.status(500).json({ message: "Server error", error: err.message });
+        return errorResponse(res, 500, 'Internal server error');
     }
 };

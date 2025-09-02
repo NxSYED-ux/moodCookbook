@@ -44,15 +44,9 @@ const Login: React.FC = () => {
       const data: ApiResponse = await response.json();
 
       if (data.success) {
-        // Store token if provided
-        if (data.token) {
-          localStorage.setItem('authToken', data.token);
-        }
-
-        // Redirect to home page
         window.location.href = '/';
       } else {
-        setError(data.message || 'Login failed');
+        setError(data.error || 'Login failed');
       }
     } catch (err) {
       setError('Network error. Please try again.');
