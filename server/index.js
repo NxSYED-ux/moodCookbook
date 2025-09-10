@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load environment variables
-dotenv.config({ path: path.resolve(__dirname, `../.env.local`) });
+dotenv.config({ path: path.resolve(__dirname, `../.env.production`) });
 
 const port = process.env.PORT || 7000;
 const app = express();
