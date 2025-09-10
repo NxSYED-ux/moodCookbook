@@ -40,7 +40,7 @@ async function askGroqForFullRecipe(mood) {
   
   const response = await llm.invoke([
     new SystemMessage(
-      `You are a professional chef AI.
+      `You are a professional chef AI be creative.
       Based on the user's mood, suggest ONE Halal recipe.
       Respond ONLY in JSON with the following fields:
       {
