@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Recipe } from "@shared/api";
 import RecipeCard from "../components/RecipeCard";
 import Loader from "../components/Loader";
@@ -8,13 +8,7 @@ import QuickMoodSelector from "../components/QuickMoodSelector";
 
 type ResultsState = "loading" | "recipe" | "error";
 
-interface LocationState {
-  mood?: string;
-  recipe?: Recipe;
-}
-
 export default function Results() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -25,23 +19,15 @@ export default function Results() {
 
   // Get initial data from location state or URL params
   useEffect(() => {
-    const locationState = location.state as LocationState;
     const moodFromUrl = searchParams.get("mood");
 
-    if (locationState?.recipe && locationState?.mood) {
-      // Recipe data passed via navigation state
-      setCurrentMood(locationState.mood);
-      setRecipe(locationState.recipe);
-      setState("recipe");
-    } else if (moodFromUrl) {
-      // Mood passed via URL parameter, fetch recipe
+    if (moodFromUrl) {
       setCurrentMood(moodFromUrl);
       fetchRecipe(moodFromUrl);
     } else {
-      // No valid data, redirect to home
       navigate("/", { replace: true });
     }
-  }, [location.state, searchParams, navigate]);
+  }, [searchParams, navigate]);
 
   const fetchRecipe = async (mood: string) => {
     setState("loading");
@@ -57,7 +43,6 @@ export default function Results() {
       });
 
       if (!res.ok) {
-        // Try to get error details from the response
         try {
           const errorData = await res.json();
           console.error("Server error response:", errorData);
@@ -74,10 +59,6 @@ export default function Results() {
       setRecipe(data);
       setState("recipe");
 
-      // Update URL to include the mood parameter
-      const newSearchParams = new URLSearchParams();
-      newSearchParams.set("mood", mood);
-      navigate(`/results?${newSearchParams.toString()}`, { replace: true });
     } catch (error) {
       console.error("Error fetching recipe:", error);
       setError(
@@ -104,7 +85,8 @@ export default function Results() {
 
   if (state === "loading") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-8 sm:py-12 transition-colors duration-500">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-8 sm:py-12">
+
         {/* Enhanced animated background */}
         <div className="absolute inset-0 opacity-25">
           <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-gradient-to-br from-orange-400/40 to-pink-400/40 rounded-full blur-3xl animate-pulse"></div>
@@ -144,7 +126,7 @@ export default function Results() {
 
   if (state === "error") {
     return (
-      <div className="grid place-items-center min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-8 sm:py-12 transition-colors duration-500">
+      <div className="grid place-items-center min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-gray-900 dark:via-blue-900/30 dark:to-indigo-900/50 relative overflow-hidden py-8 sm:py-12">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-1/3 left-1/3 w-40 sm:w-56 h-40 sm:h-56 bg-gradient-to-br from-red-400/30 to-orange-400/30 rounded-full blur-3xl animate-pulse"></div>
           <div
@@ -155,7 +137,7 @@ export default function Results() {
 
         <ThemeToggle className="absolute top-4 right-4 z-20" />
         <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center">
-          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
+          <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border border-white/20 dark:border-gray-700/20">
             {/* Error Animation */}
             <div className="mb-6 sm:mb-8">
               <div className="text-5xl sm:text-6xl md:text-8xl mb-4 animate-bounce">😓</div>
@@ -219,7 +201,7 @@ export default function Results() {
   if (state === "recipe" && recipe) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
-        <ThemeToggle className="absolute top-4 right-4 z-20" />
+        {/*<ThemeToggle className="absolute top-4 right-4 z-20" />*/}
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Modern Clean Header */}

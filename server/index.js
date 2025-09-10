@@ -4,7 +4,7 @@ import cors from "cors";
 import http from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import mongodbConnection from "./config/connection.js";
+// import mongodbConnection from "./config/connection.js";
 import authRoutes from "./routes/auth.js";
 import getRecipeRoutes from "./routes/recipe.js";
 
@@ -13,14 +13,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load environment variables
-dotenv.config({ path: path.resolve(__dirname, `../.env.production`) });
+dotenv.config({ path: path.resolve(__dirname, `../.env.local`) });
 
 const port = process.env.PORT || 7000;
 const app = express();
 const server = http.createServer(app);
 
 // Database Connection
-await mongodbConnection();
+// await mongodbConnection();
 
 // Middleware
 app.use(cors());

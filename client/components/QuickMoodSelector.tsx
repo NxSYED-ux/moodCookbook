@@ -59,7 +59,7 @@ export default function QuickMoodSelector({
             <button
               key={mood.value}
               onClick={() => onSelectMood(mood.value)}
-              className={`group relative flex flex-col items-center justify-center p-3 sm:p-4 lg:p-6 rounded-2xl transition-all duration-300 border-2 w-full max-w-[140px] ${
+              className={`group relative flex flex-col items-center justify-center p-3 sm:p-4 lg:p-6 rounded-2xl border-2 w-full max-w-[140px] ${
                 currentMood === mood.value
                   ? `bg-gradient-to-br ${mood.color} text-white border-transparent shadow-lg shadow-purple-500/25 scale-105`
                   : "bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 text-gray-700 dark:text-gray-300 hover:shadow-md hover:scale-105"

@@ -1,6 +1,24 @@
-import axios from "axios";
+import { ChatOpenAI } from "@langchain/openai";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import he from "he";
 
+// ---------- Groq (LangChain client) ----------
+function createGroq() {
+  if (!process.env.GROQ_API_KEY) {
+    throw new Error("Missing GROQ_API_KEY in environment");
+  }
+  
+  return new ChatOpenAI({
+    model: "llama-3.1-8b-instant",
+    apiKey: process.env.GROQ_API_KEY,
+    configuration: {
+      baseURL: "https://api.groq.com/openai/v1",
+    },
+    temperature: 1,
+  });
+}
+
+// ---------- Main Handler ----------
 export async function handleGetRecipe(req, res) {
   try {
     const { mood } = req.body;
@@ -8,134 +26,53 @@ export async function handleGetRecipe(req, res) {
       return res.status(400).json({ error: "Mood is required" });
     }
     
-    const triedNames = [];
-    
-    for (let i = 0; i < 3; i++) {
-      const recipeName = await askGroqForRecipeName(mood, triedNames);
-      triedNames.push(recipeName);
-      
-      const match = await searchForkify(recipeName);
-      
-      if (match) {
-        const details = await getRecipeDetails(match.id);
-        const recipeData = details.data.recipe;
-        
-        const recipe = {
-          name: he.decode(recipeData.title),
-          image: recipeData.image_url,
-          ingredients: recipeData.ingredients.map(
-            (ing) =>
-              `${ing.quantity || ""} ${ing.unit || ""} ${ing.description}`.trim()
-          ),
-          steps: await askGroqForSteps(
-            recipeData.title,
-            recipeData.ingredients.map(
-              (ing) =>
-                `${ing.quantity || ""} ${ing.unit || ""} ${ing.description}`.trim()
-            )
-          ),
-          servings: recipeData.servings || "Unknown",
-          readyInMinutes: recipeData.cooking_time || 0,
-        };
-        
-        return res.json(recipe);
-      }
-      
-      console.log(`Forkify had no match for: ${recipeName}`);
-    }
-    
-    return res.status(404).json({ error: "No recipes found after 3 attempts" });
+    const recipe = await askGroqForFullRecipe(mood);
+    return res.json(recipe);
   } catch (error) {
     console.error("Error getting recipe:", error);
     return res.status(500).json({ error: "Internal server error" });
   }
 }
 
-// ---------- Helper Functions ----------
-async function askGroqForRecipeName(mood, exclude = []) {
-  const GROQ_API_KEY = process.env.GROQ_API_KEY;
-  const { data } = await axios.post(
-    "https://api.groq.com/openai/v1/chat/completions",
-    {
-      model: "llama-3.1-8b-instant",
-      messages: [
-        {
-          role: "system",
-          content: `You are a chef AI. Suggest real-world recipe names that likely exist in Forkify dataset.
-                    Avoid fantasy names. Return ONLY the recipe name.
-                    Only suggest recipes that are Halal.`,
-        },
-        {
-          role: "user",
-          content: `Suggest a Halal recipe for someone feeling "${mood}".
-                    Do not repeat these: ${exclude.join(", ")}`,
-        },
-      ],
-      temperature: 0.7,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${GROQ_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+// ---------- Helper (all-in-one recipe generation) ----------
+async function askGroqForFullRecipe(mood) {
+  const llm = createGroq();
   
-  if (!data?.choices?.[0]?.message?.content) {
-    throw new Error("Groq did not return a recipe name");
+  const response = await llm.invoke([
+    new SystemMessage(
+      `You are a professional chef AI.
+      Based on the user's mood, suggest ONE Halal recipe.
+      Respond ONLY in JSON with the following fields:
+      {
+        "name": "Recipe name",
+        "image": "A realistic image URL (e.g. from Unsplash, Pexels, or generated)",
+        "ingredients": ["list of ingredients with quantities"],
+        "steps": ["clear step-by-step cooking instructions"],
+        "servings": "number of servings (estimate)",
+        "readyInMinutes": "time in minutes (estimate)"
+      }`
+    ),
+    new HumanMessage(`The user is feeling "${mood}". Suggest a recipe.`),
+  ]);
+  
+  const content = response.content;
+  if (typeof content !== "string" || !content.trim()) {
+    throw new Error("Groq did not return recipe data");
   }
   
-  return data.choices[0].message.content.trim();
-}
-
-async function askGroqForSteps(title, ingredients) {
-  const GROQ_API_KEY = process.env.GROQ_API_KEY;
-  const { data } = await axios.post(
-    "https://api.groq.com/openai/v1/chat/completions",
-    {
-      model: "llama-3.1-8b-instant",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a professional chef AI. Generate concise cooking instructions as clear step-by-step numbered steps. Return only the steps, no extra commentary.",
-        },
-        {
-          role: "user",
-          content: `Recipe: ${title}\nIngredients: ${ingredients.join(", ")}\n\nWrite cooking steps.`,
-        },
-      ],
-      temperature: 0.7,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${GROQ_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
-  
-  if (!data?.choices?.[0]?.message?.content) {
-    throw new Error("Groq did not return steps");
+  let parsed;
+  try {
+    parsed = JSON.parse(content);
+  } catch {
+    throw new Error("Groq did not return valid JSON");
   }
   
-  return data.choices[0].message.content
-    .split(/\n+/)
-    .map((s) => s.replace(/^\d+[\).\s-]*/, "").trim())
-    .filter((s) => s.length > 0);
-}
-
-async function searchForkify(recipeName) {
-  const url = `https://forkify-api.herokuapp.com/api/v2/recipes?search=${encodeURIComponent(
-    recipeName
-  )}`;
-  
-  const { data } = await axios.get(url);
-  return data.data?.recipes?.[0] || null;
-}
-
-async function getRecipeDetails(recipeId) {
-  const url = `https://forkify-api.herokuapp.com/api/v2/recipes/${recipeId}`;
-  const { data } = await axios.get(url);
-  return data;
+  return {
+    name: he.decode(parsed.name || "Untitled"),
+    image: parsed.image || "",
+    ingredients: parsed.ingredients || [],
+    steps: parsed.steps || [],
+    servings: parsed.servings || "Unknown",
+    readyInMinutes: parsed.readyInMinutes || 0,
+  };
 }

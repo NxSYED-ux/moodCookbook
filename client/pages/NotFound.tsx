@@ -32,7 +32,7 @@ const NotFound = () => {
         ></div>
       </div>
 
-      <ThemeToggle className="absolute top-4 right-4 z-20" />
+      {/*<ThemeToggle className="absolute top-4 right-4 z-20" />*/}
 
       <div className="relative z-10 max-w-md w-full mx-4 px-4 text-center">
         <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-2xl shadow-xl p-6 sm:p-8 border border-white/20 dark:border-gray-700/20 transition-colors duration-500">
