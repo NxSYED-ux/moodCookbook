@@ -34,6 +34,7 @@ export async function handleGetRecipe(req, res) {
   }
 }
 
+
 // ---------- Helper (all-in-one recipe generation) ----------
 async function askGroqForFullRecipe(mood) {
   const llm = createGroq();
@@ -45,7 +46,7 @@ async function askGroqForFullRecipe(mood) {
       Respond ONLY in JSON with the following fields:
       {
         "name": "Recipe name",
-        "image": "A realistic image URL",
+        "image": "Generate a realistic image and return me its url",
         "ingredients": ["list of ingredients with quantities"],
         "steps": ["clear step-by-step cooking instructions"],
         "servings": "number of servings (estimate)",
