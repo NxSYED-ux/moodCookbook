@@ -45,7 +45,7 @@ async function askGroqForFullRecipe(mood) {
       Respond ONLY in JSON with the following fields:
       {
         "name": "Recipe name",
-        "image": "A realistic image URL (e.g. from Unsplash, Pexels, or generated)",
+        "image": "A realistic image URL",
         "ingredients": ["list of ingredients with quantities"],
         "steps": ["clear step-by-step cooking instructions"],
         "servings": "number of servings (estimate)",
