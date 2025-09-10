@@ -100,7 +100,7 @@ export default function Results() {
           ></div>
         </div>
 
-        <ThemeToggle className="absolute top-4 right-4 z-20" />
+        {/*<ThemeToggle className="absolute top-4 right-4 z-20" />*/}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
           {/* Loading Header */}
           <div className="text-center mb-6 sm:mb-8">
@@ -135,7 +135,7 @@ export default function Results() {
           ></div>
         </div>
 
-        <ThemeToggle className="absolute top-4 right-4 z-20" />
+        {/*<ThemeToggle className="absolute top-4 right-4 z-20" />*/}
         <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center">
           <div className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-8 md:p-12 border border-white/20 dark:border-gray-700/20">
             {/* Error Animation */}
